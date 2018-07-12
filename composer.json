@@ -33,7 +33,7 @@
         "psr-4": {
             "App\\": "app/"
         },
-        "files": ["app/Helpers/auth.php", "app/Helpers/push_notification.php"]
+        "files": ["app/Helpers/auth.php", "app/Helpers/util.php", "app/Helpers/push_notification.php"]
     },
     "autoload-dev": {
         "psr-4": {

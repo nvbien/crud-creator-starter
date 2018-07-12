@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::middleware( [ 'author' ] )->group( function () {
+  Route::get('/set-timezone-local', ['as' => 'set-timezone-local', 'uses' => 'HomeController@setTimezoneLocal']);
   Route::get('/', 'HomeController@index')->name('home');
 
   Route::resource('users', 'UserController');

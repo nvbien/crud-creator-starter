@@ -33,6 +33,8 @@ class ActivityLogDataTable extends DataTable
                 $str = $text[0].' -> '.$text[1];
             }
             return '<a href="'. $activityLog['url'].'">'.$str.'</a>';
+        } )->editColumn( 'created_at', function ( ActivityLog $activityLog ) {
+            return  format_date_local_time($activityLog['created_at']);
         } )->rawColumns(['route_name']);
     }
 

@@ -108,5 +108,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/js/app.min.js"></script>
 
 @yield('scripts')
+<script type="text/javascript">
+    $(document).ready(function(){
+        var offset = "{{ session('offset')}}";
+        // console.log(moment().getTimezoneAbbreviation());
+        if(offset.length==0){
+            var visitorTime = new Date();
+            var visitorTimezone = -visitorTime.getTimezoneOffset()/60;
+
+            $.ajax({
+                type: "GET",
+                url: '{{route("set-timezone-local")}}',
+                data: 'offset='+ visitorTimezone,
+                success: function(result){
+                    if(result.success){
+                        console.log('changed time zone');
+                    }
+                }
+            });
+        }
+        $('body').on('click', '.close-menu', function(){
+            $(".collapse").collapse('hide');
+        });
+    });
+</script>
 </body>
 </html>

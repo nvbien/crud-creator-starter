@@ -14,6 +14,12 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    /**
+     * date and time format refer to
+     * http://www.php.net/manual/en/function.date.php
+     */
+    'date_format' => env('APP_DATE_FORMAT', 'F j Y'),
+    'time_format' => env('APP_TIME_FORMAT', 'g:i A'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
