@@ -44,12 +44,7 @@ $i = 1;?>
         </th>
         </thead>
         <tbody>
-        @foreach(
-        [
-            'activityLogs'=>'Activity Log',
-            'users'=>'Users',
-            'roles'=>'User Groups',
-        ]
+        @foreach( config('permissions')
          as $k=>$role)
             <tr class="{{$i % 2 == 0 ? 'even' : 'old'}}">
                 <td>{{$i}}</td>

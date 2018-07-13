@@ -9,3 +9,7 @@
 <li class="{{ Request::is('activityLogs*') ? 'active' : '' }}">
     <a href="{!! route('activityLogs.index') !!}"><i class="fa fa-edit"></i><span>Activity Logs</span></a>
 </li>
+<li class="{{ Request::is('hotels*') ? 'active' : '' }}">
+    <a href="{!! route('hotels.index') !!}"><i class="fa fa-edit"></i><span>Hotels</span></a>
+</li>
+

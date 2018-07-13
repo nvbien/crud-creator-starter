@@ -13,7 +13,7 @@
 
 Auth::routes();
 
-Route::middleware( [ 'author' ] )->group( function () {
+Route::middleware( [ 'auth' ] )->group( function () {
   Route::get('/set-timezone-local', ['as' => 'set-timezone-local', 'uses' => 'HomeController@setTimezoneLocal']);
   Route::get('/', 'HomeController@index')->name('home');
 
@@ -22,4 +22,6 @@ Route::middleware( [ 'author' ] )->group( function () {
   Route::resource('roles', 'RoleController');
 
   Route::resource('activityLogs', 'ActivityLogController');
+  Route::post('hotels/{id}/setAdmin', 'HotelController@setAdmin')->name('hotel.setAdmin');
+  Route::resource('hotels', 'HotelController');
 });
