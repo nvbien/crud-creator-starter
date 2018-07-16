@@ -7,12 +7,14 @@ use App\DataTables\HotelUserDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateHotelRequest;
 use App\Http\Requests\UpdateHotelRequest;
+use App\Models\Hotel;
 use App\Models\UserHotel;
 use App\Repositories\HotelRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 class HotelController extends AppBaseController
@@ -71,10 +73,9 @@ class HotelController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show(Hotel $hotel)
     {
-        $hotelUserDataTable = new HotelUserDataTable($id);
-        $hotel = $this->hotelRepository->findWithoutFail($id);
+        $hotelUserDataTable = new HotelUserDataTable($hotel->id);
 
         if (empty($hotel)) {
             Flash::error('Hotel not found');

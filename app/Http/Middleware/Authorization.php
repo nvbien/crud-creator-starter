@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\ActivityLog;
+use App\Models\User;
 use Closure;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -23,15 +24,36 @@ class Authorization
             return redirect('/login');
         }
         $user = Auth::guard($guard)->user();
-        $role = $user->role;
         $route = Route::currentRouteName();
-        $permissions = json_decode($role ? $role->permissions ? $role->permissions: [] : $user->permissions, true);
-        $det_per = explode ('.', $route);
-        if(!is_array($permissions)
-            || (count($det_per) > 1
-                && in_array($det_per[1],['index', 'create', 'edit', 'delete'])
-                && !array_key_exists($route,$permissions))){
-            App::abort(403, 'Access denied');
+        if(!$user->isSuperAdmin()){
+            $role = $user->role;
+            $permissions = json_decode($role ? $role->permissions ? $role->permissions: [] : $user->permissions, true);
+            $det_per = explode ('.', $route);
+
+            if(!is_array($permissions)
+                || (count($det_per) > 1
+                    && in_array($det_per[1],['index', 'edit', 'create', 'destroy'])
+                    && !array_key_exists($route,$permissions))
+            ){
+                App::abort(403, 'Access denied');
+            }
+            $params = $request->route()->parameters;
+            if(count($params) > 0){
+                $obj = reset($params);
+                if(count($det_per) > 1
+                    && in_array($det_per[1],['show', 'edit', 'update', 'destroy'])){
+                    if($det_per[1] =='update'){
+                        $det_per[1]= 'edit';
+                    }
+                    elseif($det_per[1] =='show'){
+                        $det_per[1]= 'view';
+                    }
+
+                    if(!$user->can($det_per[1], $obj)){
+                        App::abort(403, 'Access denied');
+                    }
+                }
+            }
         }
         $uri = $request->getRequestUri();
         if(strlen($uri)< 200){

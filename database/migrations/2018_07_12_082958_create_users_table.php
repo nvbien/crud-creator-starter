@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration {
 			$table->integer('role_id')->nullable();
 			$table->boolean('is_hotel_admin')->nullable();
 			$table->boolean('is_bus_operator')->nullable();
+			$table->boolean('is_super_admin')->nullable();
 			$table->string('avatar')->nullable();
 		});
 	}

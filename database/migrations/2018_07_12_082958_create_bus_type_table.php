@@ -12,7 +12,7 @@ class CreateBusTypeTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('bus_type', function(Blueprint $table)
+		Schema::create('bus_types', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('code')->unique();
@@ -31,7 +31,7 @@ class CreateBusTypeTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('bus_type');
+		Schema::drop('bus_types');
 	}
 
 }

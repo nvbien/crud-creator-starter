@@ -15,8 +15,8 @@ class CreateUserCompaniesTable extends Migration {
 		Schema::create('user_companies', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('ticket_id')->nullable();
-			$table->integer('route_id')->nullable();
+			$table->integer('user_id')->nullable();
+			$table->integer('company_id')->nullable();
 		});
 	}
 

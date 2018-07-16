@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class Hotel
@@ -60,5 +61,30 @@ class Hotel extends Model
         
     ];
 
+    /**
+     * Get the comments for the blog post.
+     */
+    public function admins() {
+        return $this->hasManyThrough( User::class, UserHotel::class, 'hotel_id' ,'user_id');
+    }
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function admin_hotels() {
+        return $this->hasMany( UserHotel::class);
+    }
+    /**
+     * Get the comments for the blog post.
+     */
+    public function employees() {
+        return $this->hasMany( Employee::class);
+    }
+
+    public static function query(){
+        $query = parent::query();
+        $query->join('user_hotels','hotels.id','user_hotels.hotel_id')->where('user_id', Auth::id())->select('hotels.*');
+        return $query;
+    }
     
 }

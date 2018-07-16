@@ -23,6 +23,7 @@ class CreateEmployeesTable extends Migration {
 			$table->dateTime('expired_date')->nullable();
 			$table->string('status')->nullable();
 			$table->string('user_id')->nullable();
+			$table->string('hotel_id')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 			$table->string('groups')->nullable();

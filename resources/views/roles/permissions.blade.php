@@ -33,8 +33,8 @@ $i = 1;?>
             </label></th>
         <th>
             <label style="margin-bottom: 0;">
-                <input type="checkbox" id="delete-all" name="permissions[delete]"
-                       class="flat-red delete" {{array_key_exists('delete', $_permissions) ? 'checked':''}}> Delete
+                <input type="checkbox" id="delete-all" name="permissions[destroy]"
+                       class="flat-red delete" {{array_key_exists('destroy', $_permissions) ? 'checked':''}}> Delete
             </label></th>
         <th>
             <label style="margin-bottom: 0;">
@@ -75,9 +75,9 @@ $i = 1;?>
                 </td>
                 <td>
                     <label style="margin-bottom: 0;">
-                        <input type="checkbox" name="permissions[{{$k}}.delete]" data-key="{{$k}}"
+                        <input type="checkbox" name="permissions[{{$k}}.destroy]" data-key="{{$k}}"
                                data-type="delete" id="delete-{{$k}}"
-                               class="minimal delete {{$k}}" {{array_key_exists($k.'.delete', $_permissions) ? 'checked':''}}>
+                               class="minimal delete {{$k}}" {{array_key_exists($k.'.destroy', $_permissions) ? 'checked':''}}>
                         Delete
                     </label>
                 </td>

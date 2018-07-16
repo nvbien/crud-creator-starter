@@ -59,4 +59,16 @@
         public static $rules = [
             'email' => 'string|max:255|unique:users,email',
         ];
+        /**
+         * Get the comments for the blog post.
+         */
+        public function hotels() {
+            return $this->hasManyThrough( Hotel::class, UserHotel::class, 'user_id','id','id', 'hotel_id' );
+        }
+        /**
+         * Get the comments for the blog post.
+         */
+        public function isSuperAdmin() {
+            return $this->is_super_admin;
+        }
     }

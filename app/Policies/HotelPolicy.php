@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\Hotel;
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class HotelPolicy
+class HotelPolicy extends BasePolicy
 {
     use HandlesAuthorization;
 
@@ -20,6 +20,7 @@ class HotelPolicy
     public function view(User $user, Hotel $hotel)
     {
         //
+        return ($user->hotels->where('id', $hotel->id)->count() >0);
     }
 
     /**
@@ -43,6 +44,7 @@ class HotelPolicy
     public function update(User $user, Hotel $hotel)
     {
         //
+        return ($user->hotels->where('id', $hotel->id)->count() >0);
     }
 
     /**
@@ -54,6 +56,6 @@ class HotelPolicy
      */
     public function delete(User $user, Hotel $hotel)
     {
-        //
+        return ($user->hotels->where('id', $hotel->id)->count() >0);
     }
 }
